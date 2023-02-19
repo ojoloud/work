@@ -1,4 +1,4 @@
-""" Script to monitor dns stability """
+""" Script to modify network configuration """
 import re
 import sys
 import time
