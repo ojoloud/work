@@ -105,12 +105,22 @@ def main(args):
 
         time.sleep(20)
         # print intermittent result to verify that all adapters disabled
-        interm_res = execute_netsh_show_command()
-        for interface in interm_res:
-            print(f'\t{interface["name"]}\t{interface["status"]}')
+        interim_res = execute_netsh_show_command()
+        print('\tNAME\tSTATUS')
+        print('_________________________')
+        for interface in interim_res:
+            print(f'\t{interface["name"]}\t{interface["status"]}\n')
 
         for disabled_interface in interface_to_enable:
             execute_netsh_update_command(disabled_interface, True)
+
+        interim_res = execute_netsh_show_command()
+
+        # print intermittent result to verify that all adapters enabled
+        print('\tNAME\tSTATUS')
+        print('_________________________')
+        for interface in interim_res:
+            print(f'\t{interface["name"]}\t{interface["status"]}\n')
 
     else:
         print_help()
